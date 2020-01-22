@@ -136,6 +136,7 @@ class Jotted {
     var $editor = document.createElement('div')
     $editor.innerHTML = template.editorContent(type, file.url)
     $editor.className = template.editorClass(type)
+    $editor.setAttribute('role', 'tabs')
 
     $parent.appendChild($editor)
 
@@ -236,9 +237,11 @@ class Jotted {
     var $container = this._get('$container')
     var paneActive = this._get('paneActive')
     util.removeClass($container, template.paneActiveClass(paneActive))
+    util.setAttribute('aria-selected', 'false')
 
     paneActive = this._set('paneActive', util.data(e.target, 'jotted-type'))
     util.addClass($container, template.paneActiveClass(paneActive))
+    util.setAttribute('aria-selected', 'true')
 
     e.preventDefault()
   }
